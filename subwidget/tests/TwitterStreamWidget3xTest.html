@@ -47,6 +47,9 @@
               // init widget
               widgetUnderTest = new Module({
                 serviceUrl: "https://71fba74e.ngrok.io/arcgis/rest/services/ASDITrackInformation/StreamServer",
+                filter: {
+                  where: "is_rt = 'false'"
+                },
                 map: this.map
               }, 'widgetNode');
               widgetUnderTest.startup();

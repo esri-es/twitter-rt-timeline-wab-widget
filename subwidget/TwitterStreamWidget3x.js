@@ -24,8 +24,11 @@ define([
     constructor: function(options){
         options = options || {};
 
-        this.serviceUrl = this.serviceUrl;
-        this.map = this.map;
+        this.serviceUrl = options.serviceUrl;
+        this.filter = options.filter;
+        this.map = options.map;
+
+        that = this;
     },
     // Properties to be sent into constructor
 
@@ -40,7 +43,7 @@ define([
 
       this.inherited(arguments);
 
-      var serviceUrl = this.serviceUrl;
+      var serviceUrl = that.serviceUrl;
 
       // serviceUrl = this.config.serviceUrl;
       serviceUrl = (serviceUrl.indexOf("http") === 0)? serviceUrl.replace("http","ws"): serviceUrl;
@@ -48,6 +51,11 @@ define([
       serviceUrl = (serviceUrl.indexOf("/subscribe") === -1)? serviceUrl + "/subscribe":serviceUrl;
 
       var exampleSocket = new WebSocket(serviceUrl);
+
+      exampleSocket.onopen = function() {
+        exampleSocket.send(JSON.stringify({filter: that.filter}));
+      };
+
       that = this;
 
       exampleSocket.onmessage = function (event) {
