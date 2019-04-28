@@ -50,10 +50,16 @@ define([
       serviceUrl = (serviceUrl.indexOf("ws:") === 0)? serviceUrl.replace("ws:","wss:"): serviceUrl;
       serviceUrl = (serviceUrl.indexOf("/subscribe") === -1)? serviceUrl + "/subscribe":serviceUrl;
 
+
       var exampleSocket = new WebSocket(serviceUrl);
+
 
       exampleSocket.onopen = function() {
         exampleSocket.send(JSON.stringify({filter: that.filter}));
+      };
+
+      exampleSocket.onerror = function(err){
+        alert("The connection with the Twitter service could not be established.")
       };
 
       that = this;
