@@ -1,0 +1,24 @@
+{
+  "name": "TwitterStreamTimeline",
+  "2D": true,
+  "3D": false,
+  "platform": "HTML",
+  "version": "0.0.1",
+  "wabVersion": "2.11",
+  "author": "Raul Jimenez Ortega <raul.jimenez@esri.es>",
+  "description": "A custom Web AppBuilder widget.",
+  "copyright": "",
+  "license": "Apache2.0",
+  "properties": {
+    "inPanel": true,
+    "hasLocale": true,
+    "hasStyle": true,
+    "hasConfig": true,
+    "hasUIFile": true,
+    "hasSettingPage": true,
+    "hasSettingUIFile": true,
+    "hasSettingLocale": true,
+    "hasSettingStyle": true,
+    "IsController": false
+  }
+}

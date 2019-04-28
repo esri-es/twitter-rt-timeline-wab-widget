@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>TwitterStreamWidget3x Tests</title>
+    <link rel="stylesheet" href="//js.arcgis.com/3.28/esri/css/esri.css">
+    <style>
+        @import url('tests.css');
+        @import url('../resources/TwitterStreamWidget3x.css');
+
+        /* override default styles here */
+        #widgetContainer{
+          background-color: #171717;
+          overflow: auto;
+          height: 100%;
+        }
+    </style>
+</head>
+  <body>
+    <div id="map"></div>
+    <div id="widgetContainer">
+        <div id="widgetNode"></div>
+    </div>
+    <script src="//js.arcgis.com/3.28/"></script>
+    <script type="text/javascript">
+        var testsUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
+        var widgetUnderTest;
+        var map;
+
+        require([
+
+          'esri/arcgis/utils',
+
+            testsUrl + '../TwitterStreamWidget3x.js',
+            'dojo/domReady!'
+        ], function(
+
+          arcgisUtils,
+
+          Module
+        ) {
+            var webMapItemID = 'f6d361855e8b4318a1d6b1a2fe328896';
+            arcgisUtils.createMap(webMapItemID, 'map').then(function(response) {
+              map = response.map;
+
+              // init widget
+              widgetUnderTest = new Module({
+                serviceUrl: "https://71fba74e.ngrok.io/arcgis/rest/services/ASDITrackInformation/StreamServer",
+                map: this.map
+              }, 'widgetNode');
+              widgetUnderTest.startup();
+            });
+        });
+    </script>
+</body>
+</html>
